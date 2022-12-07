@@ -4,15 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
-@ToString
 public class Passport {
 
     @Id
@@ -22,10 +18,23 @@ public class Passport {
     @Column(nullable = false)
     private String number;
 
+    //PASSPORT TABLES DOESNT OWN THE RELATIONSHIP(i.e it wont have a student_id column) for that we
+    //Need to declare this mappedBy property with value as variable name of passport in student class
+    @OneToOne(fetch = FetchType.LAZY,mappedBy = "passport")
+    private Student student;
+
     public Passport(String number){
         this.number  = number;
     }
     public Passport(){
 
+    }
+
+    @Override
+    public String toString() {
+        return "Passport{" +
+                "id=" + id +
+                ", number='" + number + '\''+
+                '}';
     }
 }

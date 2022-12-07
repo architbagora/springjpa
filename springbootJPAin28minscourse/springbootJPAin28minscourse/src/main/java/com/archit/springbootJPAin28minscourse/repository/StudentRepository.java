@@ -69,8 +69,47 @@ public class StudentRepository {
         //Entity manager is will detach and stop tracking it.
         entityManager.detach(student2);
 
+        //THIS WONT BE FLUSED TO DB
+        student2.setName("Angular JS in 100 steps - Updated AGAIN");
+
         //quries fired for only student2
         entityManager.flush();
     }
+
+    public void someOperationsToUnderstandPersistanceContext() {
+        //DATABASE Operation1 - retrive student
+        Student student = entityManager.find(Student.class, 20001l);
+        //Persistance context (student)
+
+        //IF @Transactional is removed this will throw error , in hibernate terminology, Session=Persistence context
+        //DATABASE Operation2 - retrive passport
+        Passport passport = student.getPassport();
+        //Persistance context (student,passport)
+
+        //DATABASE Opertaion3 - update passport
+        //log.info(passport.getNumber());
+        passport.setNumber("LFNHWOWIDNHWODBN");
+        //Persistance context (student,passport++)
+
+        student.setName("ADAKDBNAKDBNAKJ");
+        //Persistance context (student++,passport++)
+    }
+
+
+    //Transactional is at class level here
+    @Transactional
+    public void testTransactional(long studentId) throws Exception {
+        Student student = entityManager.find(Student.class, studentId);
+
+        student.setName("CHANGED NAME");
+
+        //MAKE SURE DB QUERY IS FIRED
+        entityManager.flush();
+
+        student.setName("CHANGED NAME AGAIN");
+        //Exception after a DB flush
+        throw new Exception("Error happened after DB FLush");
+    }
+
 
 }

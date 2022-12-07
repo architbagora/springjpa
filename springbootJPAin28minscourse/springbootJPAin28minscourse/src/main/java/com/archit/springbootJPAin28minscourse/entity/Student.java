@@ -9,7 +9,6 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@ToString
 public class Student {
 
     @Id
@@ -30,5 +29,11 @@ public class Student {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
