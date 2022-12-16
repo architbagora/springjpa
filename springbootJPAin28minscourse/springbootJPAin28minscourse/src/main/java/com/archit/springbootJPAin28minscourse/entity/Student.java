@@ -2,9 +2,10 @@ package com.archit.springbootJPAin28minscourse.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -22,10 +23,16 @@ public class Student {
     @OneToOne(fetch = FetchType.LAZY)
     Passport passport;
 
-    public Student(){
+    @ManyToMany
+    @JoinTable(name = "STUDENT_COURSE"
+            , joinColumns = @JoinColumn(name = "STUDENT_ID")
+            , inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
+    List<Course> courses = new ArrayList<>();
+
+    public Student() {
     }
 
-    public Student(String name){
+    public Student(String name) {
         this.name = name;
     }
 

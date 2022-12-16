@@ -3,9 +3,10 @@ package com.archit.springbootJPAin28minscourse.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.experimental.FieldNameConstants;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -25,8 +26,37 @@ public class Course {
     @Setter
     private String name;
 
+    @Getter
+    @Setter
+    //SINCE THIS IS NON OWNING SIDE OF THE RELATION (NO COLUMN IN COURSE TABLE) HENCE MAPPEDBY
+    @OneToMany(mappedBy = "course")
+    private List<Review> reviews = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "courses")
+    List<Student> students = new ArrayList<>();
+
     public Course(String name) {
         this.name = name;
+    }
+
+    public void addReview(Review review){
+        this.reviews.add(review);
+    }
+
+    public void removeReview(Review review){
+        this.reviews.remove(review);
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void addStudent(Student student) {
+        this.students.add(student);
     }
 
     @Override

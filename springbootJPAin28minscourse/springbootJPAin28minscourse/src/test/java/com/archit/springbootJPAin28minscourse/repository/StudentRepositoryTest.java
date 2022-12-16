@@ -70,10 +70,13 @@ public class StudentRepositoryTest {
         Assertions.assertEquals(student, studentafterCall);
     }
 
-
-
-
-
+    @Test
+    @Transactional
+    public void retrieveStudentAndCourse(){
+        Student student= entityManager.find(Student.class , 20001l);
+        log.info("Student : {}",student );
+        log.info("Courses : {}",student.getCourses());
+    }
 
 
 
