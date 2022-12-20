@@ -29,6 +29,10 @@ public class Student {
             , inverseJoinColumns = @JoinColumn(name = "COURSE_ID"))
     List<Course> courses = new ArrayList<>();
 
+    public void addCourse(Course course){
+        this.courses.add(course);
+    }
+
     public Student() {
     }
 

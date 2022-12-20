@@ -1,5 +1,6 @@
 package com.archit.springbootJPAin28minscourse.repository;
 
+import com.archit.springbootJPAin28minscourse.entity.Course;
 import com.archit.springbootJPAin28minscourse.entity.Passport;
 import com.archit.springbootJPAin28minscourse.entity.Student;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -109,6 +110,21 @@ public class StudentRepository {
         student.setName("CHANGED NAME AGAIN");
         //Exception after a DB flush
         throw new Exception("Error happened after DB FLush");
+    }
+
+
+    public void insertStudentAndCourse(){
+        Student student = new Student("Jack");
+        Course course = new Course("Owesome ranga in 28 mins");
+        entityManager.persist(student);
+        entityManager.persist(course);
+
+        student.addCourse(course);
+        course.addStudent(student);
+
+        //PERSIST OWNING SIDE OF RELATION
+        entityManager.persist(student);
+
     }
 
 

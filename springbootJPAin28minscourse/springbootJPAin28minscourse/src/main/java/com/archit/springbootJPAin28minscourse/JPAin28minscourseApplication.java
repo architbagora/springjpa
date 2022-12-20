@@ -4,9 +4,13 @@ import com.archit.springbootJPAin28minscourse.entity.Course;
 import com.archit.springbootJPAin28minscourse.entity.Person;
 import com.archit.springbootJPAin28minscourse.entity.Review;
 import com.archit.springbootJPAin28minscourse.entity.Student;
+import com.archit.springbootJPAin28minscourse.entity.inheritance.Employee;
+import com.archit.springbootJPAin28minscourse.entity.inheritance.FullTimeEmployee;
+import com.archit.springbootJPAin28minscourse.entity.inheritance.ParttimeEmployee;
 import com.archit.springbootJPAin28minscourse.jdbc.PersonJdbcDao;
 import com.archit.springbootJPAin28minscourse.jpa.PersonJpaRepository;
 import com.archit.springbootJPAin28minscourse.repository.CourseRepository;
+import com.archit.springbootJPAin28minscourse.repository.EmployeeRepository;
 import com.archit.springbootJPAin28minscourse.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @SpringBootApplication
@@ -26,6 +31,8 @@ public class JPAin28minscourseApplication implements CommandLineRunner {
     @Autowired
     CourseRepository courseRepository;
 
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     @Autowired
     StudentRepository studentRepository;
@@ -37,7 +44,15 @@ public class JPAin28minscourseApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        courseRepository.addReviewsForCourse();
+
+        //INHERITANCE Code
+        employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
+        employeeRepository.insert(new ParttimeEmployee("JILL", new BigDecimal("50")));
+
+
+        // studentRepository.insertStudentAndCourse();
+
+        //courseRepository.addReviewsForCourse();
 
         //System.out.println(courseRepository.findById(10001l));
 
