@@ -46,8 +46,8 @@ public class JPAin28minscourseApplication implements CommandLineRunner {
 
 
         //INHERITANCE Code
-        employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
-        employeeRepository.insert(new ParttimeEmployee("JILL", new BigDecimal("50")));
+        //employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
+        //employeeRepository.insert(new ParttimeEmployee("JILL", new BigDecimal("50")));
 
 
         // studentRepository.insertStudentAndCourse();
