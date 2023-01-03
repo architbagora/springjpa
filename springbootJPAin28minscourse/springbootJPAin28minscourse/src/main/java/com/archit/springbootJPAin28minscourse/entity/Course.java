@@ -1,5 +1,6 @@
 package com.archit.springbootJPAin28minscourse.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,9 +13,9 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @NamedQueries(
-    value = {
-            @NamedQuery(name="query_get_all_courses", query = "Select c From Course c")
-    }
+        value = {
+                @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c")
+        }
 )
 public class Course {
     @Id
@@ -33,17 +34,18 @@ public class Course {
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany(mappedBy = "courses")
+    @JsonIgnore
     List<Student> students = new ArrayList<>();
 
     public Course(String name) {
         this.name = name;
     }
 
-    public void addReview(Review review){
+    public void addReview(Review review) {
         this.reviews.add(review);
     }
 
-    public void removeReview(Review review){
+    public void removeReview(Review review) {
         this.reviews.remove(review);
     }
 
