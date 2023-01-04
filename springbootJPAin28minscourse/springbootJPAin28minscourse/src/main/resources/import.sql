@@ -5,14 +5,14 @@ INSERT INTO PERSON (ID,NAME,LOCATION,BIRTH_DATE) values (10002, 'Ranga','glasgow
 INSERT INTO PERSON (ID,NAME,LOCATION,BIRTH_DATE) values (10003, 'Shashank','glasgow', now());
 
 
-INSERT INTO COURSE(id,name) values(10001,'jpa in 50 steps');
-INSERT INTO COURSE(id,name) values(10002,'Spring in 50 steps');
-INSERT INTO COURSE(id,name) values(10003,'Spring Boot in 50 steps');
-INSERT INTO COURSE(id,name) values(10004,'Dummy 1');
-INSERT INTO COURSE(id,name) values(10005,'Dummy 2');
-INSERT INTO COURSE(id,name) values(10006,'Dummy 3');
-INSERT INTO COURSE(id,name) values(10007,'Dummy 4');
-INSERT INTO COURSE(id,name) values(10008,'Dummy 5');
+INSERT INTO COURSE(id,name,is_deleted) values(10001,'jpa in 50 steps',false);
+INSERT INTO COURSE(id,name,is_deleted) values(10002,'Spring in 50 steps',false);
+INSERT INTO COURSE(id,name,is_deleted) values(10003,'Spring Boot in 50 steps',false);
+INSERT INTO COURSE(id,name,is_deleted) values(10004,'Dummy 1',false);
+INSERT INTO COURSE(id,name,is_deleted) values(10005,'Dummy 2',false);
+INSERT INTO COURSE(id,name,is_deleted) values(10006,'Dummy 3',false);
+INSERT INTO COURSE(id,name,is_deleted) values(10007,'Dummy 4',false);
+INSERT INTO COURSE(id,name,is_deleted) values(10008,'Dummy 5',false);
 
 
 

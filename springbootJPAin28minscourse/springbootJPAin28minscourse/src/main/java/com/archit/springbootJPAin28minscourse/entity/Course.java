@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,9 +17,16 @@ import java.util.List;
 @NoArgsConstructor
 @NamedQueries(
         value = {
-                @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c")
+                @NamedQuery(name = "query_get_all_courses", query = "Select c From Course c"),
+                @NamedQuery(name = "query_get_all_courses_join_fetch", query = "Select c From Course c JOIN FETCH c.students s")
         }
 )
+@Cacheable
+//THIS ANNOTATION WILL EXECUTE THE SQL WHENEVER DELETE IS CALLED.
+@SQLDelete(sql= "update course set is_deleted=true where id=?")
+//THIS WILL BE ADDED TO ALL FETCH CONDITIONS
+@Where(clause = "is_deleted=false")
+@Slf4j
 public class Course {
     @Id
     @GeneratedValue
@@ -36,6 +46,16 @@ public class Course {
     @ManyToMany(mappedBy = "courses")
     @JsonIgnore
     List<Student> students = new ArrayList<>();
+
+    @Getter
+    @Setter
+    private boolean isDeleted;
+
+    @PreRemove
+    private void preRemoved(){
+        log.info("COURSE GETTING REMOVED");
+        this.isDeleted = true;
+    }
 
     public Course(String name) {
         this.name = name;
